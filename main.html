@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEO - Adaptive Edge-First Optimizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div>
+            <h1>AEO</h1>
+            <p>Adaptive Edge-First Execution Framework</p>
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span> System Online
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- System State -->
+        <section class="panel">
+            <h2>Understand the Task and Check Conditions</h2>
+
+            <div class="controls">
+                <div class="control">
+                    <label for="taskLoad">Task workload</label>
+                    <select id="taskLoad">
+                        <option value="light">Light</option>
+                        <option value="medium">Medium</option>
+                        <option value="heavy" selected>Heavy</option>
+                    </select>
+                </div>
+
+                <div class="control">
+                    <label for="dataVolume">Data volume</label>
+                    <select id="dataVolume">
+                        <option value="small">Small</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+
+                <div class="control">
+                    <label for="requiredSpeed">Required speed</label>
+                    <select id="requiredSpeed">
+                        <option value="low">Low</option>
+                        <option value="balanced">Balanced</option>
+                        <option value="high" selected>High</option>
+                    </select>
+                </div>
+
+                <div class="control">
+                    <label for="bandwidth">Internet bandwidth</label>
+                    <input type="range" id="bandwidth" min="5" max="500" value="100">
+                    <span id="bandwidthValue">100 Mbps</span>
+                </div>
+
+                <div class="control">
+                    <label for="networkLatency">Network latency</label>
+                    <input type="range" id="networkLatency" min="5" max="300" value="40">
+                    <span id="networkLatencyValue">40 ms</span>
+                </div>
+
+                <div class="control">
+                    <label for="cpu">Device compute power</label>
+                    <input type="range" id="cpu" min="10" max="100" value="70">
+                    <span id="cpuValue">70%</span>
+                </div>
+
+                <div class="control">
+                    <label for="privacy">Privacy requirement</label>
+                    <select id="privacy">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+
+                <div class="control">
+                    <label for="edgeAvailability">Edge availability</label>
+                    <select id="edgeAvailability">
+                        <option value="yes" selected>Available</option>
+                        <option value="no">Unavailable</option>
+                    </select>
+                </div>
+
+                <div class="control">
+                    <label for="edgeWorkload">Edge workload</label>
+                    <select id="edgeWorkload">
+                        <option value="normal" selected>Normal</option>
+                        <option value="busy">Busy</option>
+                    </select>
+                </div>
+
+                <div class="control">
+                    <label for="edgeHealth">Edge health</label>
+                    <select id="edgeHealth">
+                        <option value="healthy" selected>Healthy</option>
+                        <option value="failed">Failed</option>
+                    </select>
+                </div>
+
+                <div class="control">
+                    <label for="edgeAffordable">Edge affordable</label>
+                    <select id="edgeAffordable">
+                        <option value="yes" selected>Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+                <div class="control">
+                    <label for="cloudAvailability">Cloud availability</label>
+                    <select id="cloudAvailability">
+                        <option value="yes" selected>Available</option>
+                        <option value="no">Unavailable</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button id="optimizeButton">Evaluate Task Placement</button>
+        </section>
+
+
+        <!-- Decision -->
+        <section class="panel decision-panel">
+
+            <h2>Adaptive Execution Decision</h2>
+
+            <div class="decision">
+
+                <div class="location">
+                    <div class="location-icon">⚡</div>
+
+                    <div>
+                        <span>Selected Placement</span>
+                        <strong id="selectedPlacement">EDGE</strong>
+                    </div>
+                </div>
+
+                <div class="reason">
+                    <h3>Why this placement?</h3>
+                    <p id="decisionReason">
+                        Edge provides the best balance between latency, privacy and cost under the current conditions.
+                    </p>
+                    <p class="decision-path" id="decisionPath" aria-live="polite"></p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="panel runtime-panel">
+            <h2>Start Task and Monitor Runtime</h2>
+            <div class="runtime-controls">
+                <div class="control">
+                    <label for="runtimeStatus">Is everything OK?</label>
+                    <select id="runtimeStatus">
+                        <option value="yes" selected>Yes, continue</option>
+                        <option value="no">No, check again</option>
+                    </select>
+                </div>
+
+                <div class="recovery-controls" id="recoveryControls" hidden>
+                    <div class="control">
+                        <label for="runtimeIssue">What went wrong?</label>
+                        <select id="runtimeIssue">
+                            <option value="" selected disabled>Choose an issue</option>
+                            <option value="network">Network bad</option>
+                            <option value="edge">Edge failed</option>
+                            <option value="server">Server busy</option>
+                        </select>
+                    </div>
+
+                    <div class="control">
+                        <label for="recoveryPlacement">Find best option</label>
+                        <select id="recoveryPlacement">
+                            <option value="" selected disabled>Choose a placement</option>
+                            <option value="DEVICE">Device</option>
+                            <option value="EDGE">Edge</option>
+                            <option value="CLOUD">Cloud</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="continueButton">Start / Continue Task</button>
+            </div>
+            <p class="runtime-result" id="runtimeResult" role="status" aria-live="polite">Ready to start task.</p>
+        </section>
+
+
+        <!-- Metrics -->
+        <section class="metrics">
+
+            <div class="metric-card">
+                <span>Latency</span>
+                <strong id="latencyMetric">38.2 ms</strong>
+                <small>Target: &lt; 50 ms</small>
+            </div>
+
+            <div class="metric-card">
+                <span>Privacy Loss</span>
+                <strong id="privacyMetric">0.02</strong>
+                <small>Limit: 0.10</small>
+            </div>
+
+            <div class="metric-card">
+                <span>Execution Cost</span>
+                <strong id="costMetric">$0.0008</strong>
+                <small>Target: &lt; $0.002</small>
+            </div>
+
+            <div class="metric-card">
+                <span>Decision Method</span>
+                <strong id="gapMetric">Flowchart</strong>
+                <small>Condition based</small>
+            </div>
+
+        </section>
+
+
+        <!-- Placement Comparison -->
+        <section class="panel">
+
+            <h2>Placement Analysis</h2>
+
+            <div class="comparison">
+
+                <div class="placement-card" id="deviceCard">
+                    <h3>📱 Device</h3>
+
+                    <p>
+                        Latency:
+                        <strong id="deviceLatency">70 ms</strong>
+                    </p>
+
+                    <p>
+                        Privacy:
+                        <strong>0.00</strong>
+                    </p>
+
+                    <p>
+                        Cost:
+                        <strong>$0.0000</strong>
+                    </p>
+
+                    <span class="badge" id="deviceAvailability">Suitable</span>
+                </div>
+
+
+                <div class="placement-card" id="edgeCard">
+                    <h3>⚡ Edge</h3>
+
+                    <p>
+                        Latency:
+                        <strong id="edgeLatency">38 ms</strong>
+                    </p>
+
+                    <p>
+                        Privacy:
+                        <strong>0.02</strong>
+                    </p>
+
+                    <p>
+                        Cost:
+                        <strong>$0.0008</strong>
+                    </p>
+
+                    <span class="badge" id="edgeAvailabilityStatus">Available</span>
+                </div>
+
+
+                <div class="placement-card" id="cloudCard">
+                    <h3>☁️ Cloud</h3>
+
+                    <p>
+                        Latency:
+                        <strong id="cloudLatency">112 ms</strong>
+                    </p>
+
+                    <p>
+                        Privacy:
+                        <strong>0.08</strong>
+                    </p>
+
+                    <p>
+                        Cost:
+                        <strong>$0.0015</strong>
+                    </p>
+
+                    <span class="badge" id="cloudAvailabilityStatus">Available</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Certificate -->
+        <section class="panel certificate">
+
+            <div class="certificate-header">
+                <h2>Flowchart Decision Check</h2>
+                <span class="verified">✓ EVALUATED</span>
+            </div>
+
+            <div class="certificate-grid">
+
+                <div>
+                    <span>Selected Placement</span>
+                    <strong id="certificatePlacement">EDGE</strong>
+                </div>
+
+                <div>
+                    <span>Feasibility</span>
+                    <strong class="success" id="feasibilityStatus">PASS</strong>
+                </div>
+
+                <div>
+                    <span>Latency Constraint</span>
+                    <strong class="success" id="latencyStatus">PASS</strong>
+                </div>
+
+                <div>
+                    <span>Privacy Constraint</span>
+                    <strong class="success" id="privacyStatus">PASS</strong>
+                </div>
+
+                <div>
+                    <span>Cost Constraint</span>
+                    <strong class="success" id="costStatus">PASS</strong>
+                </div>
+
+                <div>
+                    <span>Decision Path</span>
+                    <strong id="certificatePath">Flowchart</strong>
+                </div>
+
+            </div>
+
+            <div class="formula">
+
+                Privacy → Device suitability → Internet → Edge → Cloud fallback
+
+            </div>
+
+            <p class="certificate-text">
+                The recommendation follows the displayed conditions and flowchart order. It is a rule-based decision, not a proof of mathematical optimality.
+            </p>
+
+        </section>
+
+
+        <!-- Activity -->
+        <section class="panel">
+
+            <h2>Runtime Decision Log</h2>
+
+            <div id="logs" class="logs">
+
+                <div class="log">
+                    <span>19:30:01</span> System initialized
+                </div>
+
+                <div class="log">
+                    <span>19:30:02</span> Context monitoring started
+                </div>
+
+                <div class="log">
+                    <span>19:30:03</span> Optimal placement selected: EDGE
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        AEO — Certified Adaptive Device / Edge / Cloud Execution
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,381 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+}
+
+.header {
+    background: #101828;
+    color: white;
+    padding: 24px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 32px;
+}
+
+.header p {
+    color: #aab4c5;
+    margin-top: 5px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #28c76f;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 35px auto;
+}
+
+.panel {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.panel h2 {
+    margin-bottom: 22px;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.control {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.control label {
+    font-weight: 600;
+}
+
+.control span {
+    font-size: 14px;
+    color: #667085;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background: white;
+}
+
+button {
+    margin-top: 30px;
+    padding: 13px 24px;
+    background: #175cd3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1249a8;
+}
+
+.decision {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.location-icon {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eef4ff;
+    border-radius: 15px;
+    font-size: 28px;
+}
+
+.location span,
+.metric-card span,
+.certificate-grid span {
+    display: block;
+    color: #667085;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.location strong {
+    font-size: 28px;
+    color: #175cd3;
+}
+
+.reason {
+    max-width: 550px;
+}
+
+.reason h3 {
+    margin-bottom: 8px;
+}
+
+.reason p {
+    color: #667085;
+    line-height: 1.6;
+}
+
+.reason .decision-path {
+    margin-top: 12px;
+    color: #175cd3;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.runtime-controls {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.7fr) minmax(300px, 1.5fr) auto;
+    align-items: end;
+    gap: 20px;
+}
+
+.recovery-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.recovery-controls[hidden] {
+    display: none;
+}
+
+.runtime-controls button {
+    margin-top: 0;
+    white-space: nowrap;
+}
+
+.runtime-result {
+    margin-top: 18px;
+    color: #475467;
+    line-height: 1.5;
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.metric-card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.metric-card strong {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.metric-card small {
+    color: #667085;
+}
+
+.comparison {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.placement-card {
+    border: 2px solid #e4e7ec;
+    border-radius: 12px;
+    padding: 22px;
+    transition: 0.2s;
+}
+
+.placement-card h3 {
+    margin-bottom: 20px;
+}
+
+.placement-card p {
+    margin: 12px 0;
+    color: #667085;
+}
+
+.placement-card strong {
+    color: #172033;
+}
+
+.placement-card.selected {
+    border-color: #175cd3;
+    background: #f4f8ff;
+}
+
+.badge {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #ecfdf3;
+    color: #027a48;
+    font-size: 12px;
+}
+
+.badge.unavailable,
+.failure {
+    background: #fef3f2;
+    color: #b42318;
+}
+
+.certificate {
+    border: 2px solid #12b76a;
+}
+
+.certificate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.verified {
+    color: #027a48;
+    background: #ecfdf3;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.certificate-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.certificate-grid strong {
+    font-size: 18px;
+}
+
+.success {
+    color: #039855;
+}
+
+.formula {
+    margin-top: 25px;
+    padding: 20px;
+    background: #101828;
+    color: white;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 17px;
+    text-align: center;
+}
+
+.certificate-text {
+    margin-top: 20px;
+    color: #667085;
+    line-height: 1.6;
+}
+
+.logs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.log {
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.log span {
+    color: #667085;
+    margin-right: 15px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #667085;
+}
+
+@media (max-width: 900px) {
+    .controls,
+    .metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .runtime-controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .recovery-controls {
+        grid-column: 1 / -1;
+    }
+    .comparison {
+        grid-template-columns: 1fr;
+    }
+    .certificate-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    .controls,
+    .metrics,
+    .certificate-grid {
+        grid-template-columns: 1fr;
+    }
+    .runtime-controls,
+    .recovery-controls {
+        grid-template-columns: 1fr;
+    }
+    .runtime-controls button {
+        justify-self: start;
+    }
+    .decision {
+        flex-direction: column;
+    }
+}
